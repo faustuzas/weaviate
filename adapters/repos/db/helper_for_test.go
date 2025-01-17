@@ -23,6 +23,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/require"
+
 	"github.com/weaviate/weaviate/adapters/repos/db/indexcheckpoint"
 	"github.com/weaviate/weaviate/adapters/repos/db/inverted"
 	"github.com/weaviate/weaviate/adapters/repos/db/inverted/stopwords"
@@ -202,8 +203,8 @@ func cityCountryAirportSchema() schema.Schema {
 
 func testCtx() context.Context {
 	//nolint:govet
-	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
-	return ctx
+	//ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	return context.Background()
 }
 
 func getRandomSeed() *rand.Rand {

@@ -20,6 +20,7 @@ import (
 	middleware "github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 	"github.com/sirupsen/logrus"
+
 	"github.com/weaviate/weaviate/adapters/handlers/rest/operations"
 	"github.com/weaviate/weaviate/adapters/handlers/rest/operations/objects"
 	"github.com/weaviate/weaviate/entities/additional"
@@ -86,6 +87,7 @@ func (h *objectHandlers) addObject(params objects.ObjectsCreateParams,
 	}
 	className := getClassName(params.Body)
 
+	// TODO: write path start
 	object, err := h.manager.AddObject(params.HTTPRequest.Context(),
 		principal, params.Body, repl)
 	if err != nil {

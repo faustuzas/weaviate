@@ -20,6 +20,7 @@ import (
 	"github.com/weaviate/weaviate/entities/schema"
 
 	"github.com/sirupsen/logrus"
+
 	"github.com/weaviate/weaviate/adapters/repos/db/helpers"
 	"github.com/weaviate/weaviate/adapters/repos/db/indexcounter"
 	"github.com/weaviate/weaviate/adapters/repos/db/inverted"
@@ -120,6 +121,7 @@ func (s *Shard) initLSMStore() error {
 		metrics = lsmkv.NewMetrics(s.promMetrics, string(s.index.Config.ClassName), s.name)
 	}
 
+	// TODO: LSM KV entry point
 	store, err := lsmkv.New(s.pathLSM(), s.path(), annotatedLogger, metrics,
 		s.cycleCallbacks.compactionCallbacks,
 		s.cycleCallbacks.compactionAuxCallbacks,

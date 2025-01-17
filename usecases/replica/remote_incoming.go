@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/go-openapi/strfmt"
+
 	"github.com/weaviate/weaviate/entities/schema"
 	"github.com/weaviate/weaviate/entities/storobj"
 	"github.com/weaviate/weaviate/usecases/objects"
@@ -65,6 +66,7 @@ func NewRemoteReplicaIncoming(repo RemoteIncomingRepo, schema RemoteIncomingSche
 	}
 }
 
+// TODO: continue
 func (rri *RemoteReplicaIncoming) ReplicateObject(ctx context.Context, indexName,
 	shardName, requestID string, object *storobj.Object, schemaVersion uint64,
 ) SimpleResponse {

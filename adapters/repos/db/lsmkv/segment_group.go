@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
+
 	"github.com/weaviate/weaviate/adapters/repos/db/lsmkv/segmentindex"
 	"github.com/weaviate/weaviate/adapters/repos/db/roaringset"
 	"github.com/weaviate/weaviate/entities/cyclemanager"
@@ -383,7 +384,7 @@ func (sg *SegmentGroup) get(key []byte) ([]byte, error) {
 }
 
 // not thread-safe on its own, as the assumption is that this is called from a
-// lockholder, e.g. within .get()
+// lockholder, e.g. within .get() TODO: use *WithLock to make it clear that lock is held
 func (sg *SegmentGroup) getWithUpperSegmentBoundary(key []byte, topMostSegment int) ([]byte, error) {
 	// assumes "replace" strategy
 

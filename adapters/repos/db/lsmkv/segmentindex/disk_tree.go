@@ -43,6 +43,7 @@ func NewDiskTree(data []byte) *DiskTree {
 	}
 }
 
+// TODO: this looks like Binary tree, those are not that good on disk
 func (t *DiskTree) Get(key []byte) (Node, error) {
 	if len(t.data) == 0 {
 		return Node{}, lsmkv.NotFound

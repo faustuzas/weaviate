@@ -23,6 +23,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"github.com/spaolacci/murmur3"
+
 	"github.com/weaviate/weaviate/adapters/repos/db/helpers"
 	"github.com/weaviate/weaviate/adapters/repos/db/inverted"
 	"github.com/weaviate/weaviate/adapters/repos/db/lsmkv"
@@ -308,6 +309,8 @@ func (s *Shard) putObjectLSM(obj *storobj.Object, idBytes []byte,
 	}
 
 	before = time.Now()
+	// TODO: how is durability and consistency ensured here as the main node is already written to commit node?
+	//  Do we restore inverted index as well?
 	if err := s.updateInvertedIndexLSM(obj, status, prevObj); err != nil {
 		return objectInsertStatus{}, errors.Wrap(err, "update inverted indices")
 	}

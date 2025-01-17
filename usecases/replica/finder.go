@@ -23,6 +23,7 @@ import (
 
 	"github.com/go-openapi/strfmt"
 	"github.com/sirupsen/logrus"
+
 	"github.com/weaviate/weaviate/entities/additional"
 	"github.com/weaviate/weaviate/entities/search"
 	"github.com/weaviate/weaviate/entities/storobj"

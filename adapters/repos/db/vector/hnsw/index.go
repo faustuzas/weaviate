@@ -24,6 +24,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
+
 	"github.com/weaviate/weaviate/adapters/repos/db/lsmkv"
 	"github.com/weaviate/weaviate/adapters/repos/db/priorityqueue"
 	"github.com/weaviate/weaviate/adapters/repos/db/vector/cache"
@@ -275,14 +276,15 @@ func New(cfg Config, uc ent.UserConfig,
 		tombstones:            map[uint64]struct{}{},
 		logger:                cfg.Logger,
 		distancerProvider:     cfg.DistanceProvider,
-		deleteLock:            &sync.Mutex{},
-		tombstoneLock:         &sync.RWMutex{},
-		resetLock:             &sync.RWMutex{},
-		resetCtx:              resetCtx,
-		resetCtxCancel:        resetCtxCancel,
-		shutdownCtx:           shutdownCtx,
-		shutdownCtxCancel:     shutdownCtxCancel,
-		initialInsertOnce:     &sync.Once{},
+		// TODO: it looks like they might be allocated very close to each other, false sharing might be in play
+		deleteLock:        &sync.Mutex{},
+		tombstoneLock:     &sync.RWMutex{},
+		resetLock:         &sync.RWMutex{},
+		resetCtx:          resetCtx,
+		resetCtxCancel:    resetCtxCancel,
+		shutdownCtx:       shutdownCtx,
+		shutdownCtxCancel: shutdownCtxCancel,
+		initialInsertOnce: &sync.Once{},
 
 		ef:       int64(uc.EF),
 		efMin:    int64(uc.DynamicEFMin),
